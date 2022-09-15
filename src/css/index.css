@@ -12,3 +12,18 @@ main {
   position: absolute;
   color: #ffffff;
 }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.head__img {
+  height: 10%;
+  width: 10%;
+  border-radius: 20rem;
+}
+.head__name {
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: 100;
+}

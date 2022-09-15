@@ -8,6 +8,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { Mesh } from 'three';
 
 
 const cam = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight , 0.1, 200);
@@ -20,6 +21,7 @@ const scn = new Three.Scene();
 const rend = new Three.WebGLRenderer( {
   canvas: document.querySelector('#b'),
   antialias: true
+  // alpha : true
 } );
 
 document.body.appendChild(rend.domElement);
@@ -29,7 +31,8 @@ cam.aspect = (window.innerWidth / window.innerHeight);
 cam.updateProjectionMatrix();
 rend.setSize(window.innerWidth, window.innerHeight);
 }
-res();
+
+window.addEventListener('resize', res, false);
 
 rend.setSize(window.innerWidth, window.innerHeight);
 rend.setPixelRatio(window.devicePixelRatio);
@@ -71,6 +74,21 @@ loader.load('../../node_modules/three/examples/fonts/droid/droid_serif_regular.t
   // txtmesh.rotation.y = 0;
 }) 
 
+const lst = new Three.AudioListener();
+cam.add(lst);
+
+const sound = new Three.PositionalAudio(lst);
+const audio = new Three.AudioLoader();
+
+audio.load("../dist/hills.mp3",
+  function( buffer ) {
+    sound.setBuffer(buffer);
+    sound.setVolume(1);
+    sound.setRefDistance(10);
+    sound.play();
+  }
+);
+
 const moo = new Three.TextureLoader().load('../../dist/imgs/texture/moon.jpg');
 const geo = new Three.SphereGeometry(20, 100, 90);
 const mat = new Three.MeshStandardMaterial( { map: moo, normalMap: moo} );
@@ -81,6 +99,7 @@ moon.position.z = 30;
 moon.position.setX(-10);
 
 scn.add(moon);
+moon.add(sound);
 
 
 //rectarea light
@@ -118,7 +137,7 @@ const cmt = new Three.MeshBasicMaterial( { color : 0xbb00ff, wireframes : true }
 
 const cin = new Three.Line(cg, cmt);
 
-scn.add(cin);
+scn.add(cin);  
 
 
 

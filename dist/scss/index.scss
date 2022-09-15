@@ -12,3 +12,21 @@ canvas {
     position : absolute;
     color : #ffffff;
   }
+
+.head {
+  display: flex;
+  flex-direction : column;
+  align-items: center;
+
+    &__img {
+      height : 10%;
+      width : 10%;    
+      border-radius: 20rem;
+    }
+
+    &__name {
+      font-family : 'Julius Sans One', sans-serif;
+      font-weight : 100;
+
+    }
+}
