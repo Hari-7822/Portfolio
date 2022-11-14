@@ -112,7 +112,12 @@ rectlit.lookAt(0, 0, 0);
 
 scn.add(rectlit);
 
- 
+const lit = new Three.PointLight(0xffbb00, 2, 50, 1, 2);
+lit.position.set(5, 5, 5)
+scn.add(lit)
+
+
+
 //  scn.add(new RectAreaLightHelper(rectlit) );
 
 const curve = new Three.CatmullRomCurve3( [
@@ -139,13 +144,15 @@ const cin = new Three.Line(cg, cmt);
 scn.add(cin);  
 
 
+//lit
+
 
 function camera() {
   const m = document.body.getBoundingClientRect().top;
-
+  
   moon.rotation.x += 0.002;
 
-
+  
   cam.position.z = m * -0.1;
   cam.position.x = m * -0.002;
   cam.position.y = m * -0.002;
