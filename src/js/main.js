@@ -8,8 +8,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { Mesh } from 'three';
-
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
 const cam = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight , 0.1, 200);
 
@@ -39,6 +38,21 @@ rend.setPixelRatio(window.devicePixelRatio);
 
 
 const ctrl = new OrbitControls(cam, rend.domElement);
+const pointerlock = new PointerLockControls(cam, rend.domElement);
+
+window.addEventListener('click', () => {
+  
+  const pointerlock = new PointerLockControls(cam, rend.domElement);
+  pointerlock.lock();
+
+} );
+
+window.addEventListener('dblclick', () => {
+  
+  pointerlock.unlock();
+
+});
+
 
 cam.position.z = 30;
 // cam.position.x = -3;
@@ -141,7 +155,6 @@ scn.add(cin);
 
 
 
-
 function camera() {
   const m = document.body.getBoundingClientRect().top;
 
@@ -168,7 +181,7 @@ function anime() {
   // moon.rotation.y += 0.002;
 
 
-  // ctrl.update();
+  ctrl.update();
   rend.render(scn, cam);
 }
 

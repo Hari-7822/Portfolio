@@ -1,6 +1,6 @@
-This project is my personal Portfolio
+#Portfolio
 
 Tech stacks Used
     HTML
-    CSS -> sCSS
+    CSS -> SCSS
     JS -> Three.js
