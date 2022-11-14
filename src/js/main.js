@@ -42,7 +42,7 @@ const pointerlock = new PointerLockControls(cam, rend.domElement);
 
 window.addEventListener('click', () => {
   
-  const pointerlock = new PointerLockControls(cam, rend.domElement);
+  
   pointerlock.lock();
 
 } );
@@ -88,20 +88,7 @@ loader.load('../../node_modules/three/examples/fonts/droid/droid_serif_regular.t
   // txtmesh.rotation.y = 0;
 }) 
 
-const lst = new Three.AudioListener();
-cam.add(lst);
 
-const sound = new Three.PositionalAudio(lst);
-const audio = new Three.AudioLoader();
-
-audio.load("../dist/hills.mp3",
-  function( buffer ) {
-    sound.setBuffer(buffer);
-    sound.setVolume(1);
-    sound.setRefDistance(10);
-    sound.play();
-  }
-);
 
 const moo = new Three.TextureLoader().load('../../dist/imgs/texture/moon.jpg');
 const geo = new Three.SphereGeometry(20, 100, 90);
@@ -113,7 +100,6 @@ moon.position.z = 30;
 moon.position.setX(-10);
 
 scn.add(moon);
-moon.add(sound);
 
 
 //rectarea light
@@ -125,7 +111,6 @@ rectlit.lookAt(0, 0, 0);
 // rectlit.rotation.x = 10;
 
 scn.add(rectlit);
-
 
  
 //  scn.add(new RectAreaLightHelper(rectlit) );
@@ -180,7 +165,7 @@ function anime() {
   // moon.rotation.x += 0.002;
   // moon.rotation.y += 0.002;
 
-
+  pointerlock.speedFactor = 6
   ctrl.update();
   rend.render(scn, cam);
 }
