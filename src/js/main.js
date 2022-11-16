@@ -2,7 +2,7 @@ import * as Three from 'three';
 
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
+// import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
 
 
@@ -17,6 +17,7 @@ export const rend = new Three.WebGLRenderer( {
 } );
 
 import './module/res';
+res();
 
 
 const ctrl = new OrbitControls(cam, rend.domElement);
@@ -57,24 +58,27 @@ moon.position.setX(-10);
 // scn.add(moon);
 
 
-import { RingGeometry, MeshBasicMaterial, MathUtils, DoubleSide, Mesh } from "three";
+import { res } from './module/res';
+
+function triangle() {
+
+  const geo = new Three.RingGeometry(1, 1.9, 1, 3, 0, 6.238);
+  const mat = new Three.MeshBasicMaterial( { color : 0x00adff, side : Three.DoubleSide } );
+  
+  const tri = new Three.Mesh(geo, mat);
 
 
-export default function triangle() {
+  const [x, y, z]  = Array(3).fill().map( () => Three.MathUtils.randFloatSpread(150) );
 
-    const geo = new RingGeometry(12.18, 12.528, 1, 3, 0, 6.238);
-    const mat = new MeshBasicMaterial( { color : 0x00adff, side : DoubleSide } );
-    
-    const tri = new Mesh(geo, mat);
-
-
-    const [x, y, z]  = Array(3).fill().map( () => MathUtils.randFloatSpread(100) );
-
-    tri.position.set(x, y, z);
-    scn.add(tri)
+  tri.position.set(x, y, z);
+  scn.add(tri)
 }
 
-Array(300).fill().forEach(triangle) 
+Array(100).fill().forEach(triangle)
+
+// const temp = new triangle();
+// const tri = temp.tri;
+
 
 
 
@@ -98,19 +102,20 @@ scn.add(lit)
 //lit
 
 
-// function camera() {
-//   const m = document.body.getBoundingClientRect().top;
+function camera() {
+  const m = document.body.getBoundingClientRect().top;
   
 //   moon.rotation.x += 0.002;
 
+  // tri.position.x += m * 0.04
   
 //   cam.position.z = m * -0.1;
 //   cam.position.x = m * -0.002;
 //   cam.position.y = m * -0.002;
-// }
+}
 
-// document.body.onscroll = camera;
-// camera();
+document.body.onscroll = camera;
+camera();
 
 function anime() {
   requestAnimationFrame(anime);
@@ -118,6 +123,7 @@ function anime() {
   torus.rotation.x += 0.4;
   torus.rotation.y += 0.03;
   torus.rotation.z += 0.2
+
 
 
   // pointerlock.speedFactor = 6

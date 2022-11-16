@@ -25,5 +25,6 @@ main {
 }
 .head__name {
   font-family: "Julius Sans One", sans-serif;
-  font-weight: 100;
+  color: #000;
+  font-weight: 600;
 }

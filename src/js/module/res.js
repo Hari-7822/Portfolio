@@ -1,4 +1,4 @@
-import { rend } from '../main'
+import { cam, rend } from '../main'
 
 
 
