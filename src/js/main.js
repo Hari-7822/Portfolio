@@ -1,57 +1,33 @@
 import * as Three from 'three';
-import * as curves from 'three/examples/jsm/curves/CurveExtras';
 
 
-
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-// import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
-const cam = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight , 0.1, 200);
 
 
+export const cam = new Three.PerspectiveCamera(75, window.innerWidth / window.innerHeight , 0.1, 200);
+export const scn = new Three.Scene();
 
-const scn = new Three.Scene();
 
-
-const rend = new Three.WebGLRenderer( {
+export const rend = new Three.WebGLRenderer( {
   canvas: document.querySelector('#b'),
-  antialias: true
-  // alpha : true
+  antialias: true,
+  alpha : true
 } );
 
-document.body.appendChild(rend.domElement);
-
-function res() {
-cam.aspect = (window.innerWidth / window.innerHeight);
-cam.updateProjectionMatrix();
-rend.setSize(window.innerWidth, window.innerHeight);
-}
-
-window.addEventListener('resize', res, false);
-
-rend.setSize(window.innerWidth, window.innerHeight);
-rend.setPixelRatio(window.devicePixelRatio);
+import './module/res';
 
 
 const ctrl = new OrbitControls(cam, rend.domElement);
-const pointerlock = new PointerLockControls(cam, rend.domElement);
+ctrl.keys = {
 
-window.addEventListener('click', () => {
-  
-  
-  pointerlock.lock();
+  LEFT : 'ArrowLeft',
+  UP : 'ArrowUp',
+  RIGHT : 'ArrowRight',
+  BOTTOM : 'ArrowDown'
 
-} );
-
-window.addEventListener('dblclick', () => {
-  
-  pointerlock.unlock();
-
-});
+}
 
 
 cam.position.z = 30;
@@ -68,38 +44,40 @@ scn.add(amb);
 
 
 //text processing
-const loader = new FontLoader();
+import './module/text';
+ 
 
-loader.load('../../node_modules/three/examples/fonts/droid/droid_serif_regular.typeface.json', (droidfont) => {
-  const txtgeo = new TextGeometry('Wake up to reality', {
-    height : 2,
-    size : 5,
-    font : droidfont,
-  });
+import { cin } from './module/curve';
+// scn.add(cin);   
 
-  const txtmat = new Three.MeshNormalMaterial( { color : 0xffbb00 } );
-  const txtmesh = new Three.Mesh(txtgeo, txtmat);
-  // txtmesh.position.x = 10;
-  // txtmesh.position.y = 12;
-  txtmesh.position.set(-20,0,90);
-  scn.add(txtmesh);
-
-  // txtmesh.rotation.x = 0;
-  // txtmesh.rotation.y = 0;
-}) 
-
-
-
-const moo = new Three.TextureLoader().load('../../dist/imgs/texture/moon.jpg');
-const geo = new Three.SphereGeometry(20, 100, 90);
-const mat = new Three.MeshStandardMaterial( { map: moo, normalMap: moo} );
-
-const moon = new Three.Mesh(geo, mat);
-
+import { moon } from './module/moon';
 moon.position.z = 30;
 moon.position.setX(-10);
 
-scn.add(moon);
+// scn.add(moon);
+
+
+import { RingGeometry, MeshBasicMaterial, MathUtils, DoubleSide, Mesh } from "three";
+
+
+export default function triangle() {
+
+    const geo = new RingGeometry(12.18, 12.528, 1, 3, 0, 6.238);
+    const mat = new MeshBasicMaterial( { color : 0x00adff, side : DoubleSide } );
+    
+    const tri = new Mesh(geo, mat);
+
+
+    const [x, y, z]  = Array(3).fill().map( () => MathUtils.randFloatSpread(100) );
+
+    tri.position.set(x, y, z);
+    scn.add(tri)
+}
+
+Array(300).fill().forEach(triangle) 
+
+
+
 
 
 //rectarea light
@@ -117,49 +95,22 @@ lit.position.set(5, 5, 5)
 scn.add(lit)
 
 
-
-//  scn.add(new RectAreaLightHelper(rectlit) );
-
-const curve = new Three.CatmullRomCurve3( [
-  new Three.Vector3(-10, 0, 10),
-  new Three.Vector3(-5, 5, 5),new Three.Vector3(0, 0, 0), new Three.Vector3(5, -5, 5), new Three.Vector3(10, 0, 10) 
-] );
-
-const pt = curve.getPoints( 50 );
-
-const g = new Three.BufferGeometry().setFromPoints( pt );
-const mt = new Three.LineBasicMaterial( { color : 0xff0000 } );
-
-const c = new Three.Line(g, mt);
-
-// scn.add(c);
-
-
-const cinq = new curves.CinquefoilKnot();
-const cg = new Three.TubeGeometry(curve, 100, 20, 8, true );
-const cmt = new Three.MeshBasicMaterial( { color : 0xbb00ff, wireframes : true } );
-
-const cin = new Three.Line(cg, cmt);
-
-scn.add(cin);  
-
-
 //lit
 
 
-function camera() {
-  const m = document.body.getBoundingClientRect().top;
+// function camera() {
+//   const m = document.body.getBoundingClientRect().top;
   
-  moon.rotation.x += 0.002;
+//   moon.rotation.x += 0.002;
 
   
-  cam.position.z = m * -0.1;
-  cam.position.x = m * -0.002;
-  cam.position.y = m * -0.002;
-}
+//   cam.position.z = m * -0.1;
+//   cam.position.x = m * -0.002;
+//   cam.position.y = m * -0.002;
+// }
 
-document.body.onscroll = camera;
-camera();
+// document.body.onscroll = camera;
+// camera();
 
 function anime() {
   requestAnimationFrame(anime);
@@ -169,12 +120,13 @@ function anime() {
   torus.rotation.z += 0.2
 
 
-  // moon.rotation.x += 0.002;
-  // moon.rotation.y += 0.002;
-
-  pointerlock.speedFactor = 6
+  // pointerlock.speedFactor = 6
   ctrl.update();
   rend.render(scn, cam);
+
+  //bg
+  rend.setClearColor( 0xffbb00, 2 );
+
 }
 
 
