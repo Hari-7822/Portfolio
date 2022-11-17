@@ -59,6 +59,8 @@ moon.position.setX(-10);
 
 
 import { res } from './module/res';
+res();
+
 
 function triangle() {
 
@@ -66,7 +68,6 @@ function triangle() {
   const mat = new Three.MeshBasicMaterial( { color : 0x00adff, side : Three.DoubleSide } );
   
   const tri = new Three.Mesh(geo, mat);
-
 
   const [x, y, z]  = Array(3).fill().map( () => Three.MathUtils.randFloatSpread(150) );
 
@@ -107,8 +108,7 @@ function camera() {
   
 //   moon.rotation.x += 0.002;
 
-  // tri.position.x += m * 0.04
-  
+
 //   cam.position.z = m * -0.1;
 //   cam.position.x = m * -0.002;
 //   cam.position.y = m * -0.002;
@@ -119,14 +119,12 @@ camera();
 
 function anime() {
   requestAnimationFrame(anime);
-
+  
   torus.rotation.x += 0.4;
   torus.rotation.y += 0.03;
   torus.rotation.z += 0.2
-
-
-
-  // pointerlock.speedFactor = 6
+  
+  
   ctrl.update();
   rend.render(scn, cam);
 
