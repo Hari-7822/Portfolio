@@ -16,7 +16,7 @@ export const rend = new Three.WebGLRenderer( {
   alpha : true
 } );
 
-import './module/res';
+import { res } from './module/res';
 res();
 
 
@@ -32,7 +32,6 @@ ctrl.keys = {
 
 
 cam.position.z = 30;
-// cam.position.x = -3;
 
 const tgeo = new Three.TorusGeometry(10, 3, 16, 100);
 const tmat = new Three.MeshStandardMaterial( { color : 0x00c8ff, wireframes : true } );
@@ -55,11 +54,8 @@ import { moon } from './module/moon';
 moon.position.z = 30;
 moon.position.setX(-10);
 
-// scn.add(moon);
+scn.add(moon);
 
-
-import { res } from './module/res';
-res();
 
 
 function triangle() {
@@ -95,9 +91,9 @@ rectlit.lookAt(0, 0, 0);
 
 scn.add(rectlit);
 
-const lit = new Three.PointLight(0xffbb00, 2, 50, 1, 2);
+const lit = new Three.PointLight(0xfff, 2, 50, 1, 2);
 lit.position.set(5, 5, 5)
-scn.add(lit)
+// scn.add(lit)
 
 
 //lit
@@ -106,12 +102,12 @@ scn.add(lit)
 function camera() {
   const m = document.body.getBoundingClientRect().top;
   
-//   moon.rotation.x += 0.002;
+  // moon.rotation.x += 0.002;
 
 
-//   cam.position.z = m * -0.1;
-//   cam.position.x = m * -0.002;
-//   cam.position.y = m * -0.002;
+  // cam.position.z = m * -0.1;
+  // cam.position.x = m * -0.002;
+  // cam.position.y = m * -0.002;
 }
 
 document.body.onscroll = camera;
@@ -120,9 +116,9 @@ camera();
 function anime() {
   requestAnimationFrame(anime);
   
-  torus.rotation.x += 0.4;
-  torus.rotation.y += 0.03;
-  torus.rotation.z += 0.2
+  moon.rotation.x += 0.004;
+  moon.rotation.y += 0.003;
+  moon.rotation.z += 0.002
   
   
   ctrl.update();

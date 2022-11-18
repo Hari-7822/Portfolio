@@ -12,11 +12,11 @@ loader.load('../../node_modules/three/examples/fonts/droid/droid_serif_regular.t
   });
 
   const scn = new Scene();
-  const txtmat = new MeshNormalMaterial( { color : 0xffbb00 } );
+  const txtmat = new MeshNormalMaterial( { color : 0xffffff } );
   const txtmesh = new Mesh(txtgeo, txtmat);
   // txtmesh.position.x = 10;
   // txtmesh.position.y = 12;
-  txtmesh.position.set(-20,0,90);
+  txtmesh.position.set(10,20,1);
   scn.add(txtmesh);
 
 })
