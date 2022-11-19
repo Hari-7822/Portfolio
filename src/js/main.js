@@ -1,8 +1,5 @@
 import * as Three from 'three';
-
-
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-// import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 
 
 
@@ -16,7 +13,22 @@ export const rend = new Three.WebGLRenderer( {
   alpha : true
 } );
 
-import { res } from './module/res';
+
+export function res() {
+
+  document.body.appendChild(rend.domElement);
+  cam.aspect = (window.innerWidth / window.innerHeight);
+  cam.updateProjectionMatrix();
+  rend.setSize(window.innerWidth, window.innerHeight);
+
+}
+
+window.addEventListener('resize', res, false);
+
+rend.setSize(window.innerWidth, window.innerHeight);
+rend.setPixelRatio(window.devicePixelRatio);
+
+
 res();
 
 
@@ -36,19 +48,16 @@ cam.position.z = 30;
 const tgeo = new Three.TorusGeometry(10, 3, 16, 100);
 const tmat = new Three.MeshStandardMaterial( { color : 0x00c8ff, wireframes : true } );
 const torus = new Three.Mesh(tgeo, tmat);
-// scn.add(torus);
 
 const amb = new Three.AmbientLight(0xffffff);
 scn.add(amb);
 
 
 
-//text processing
 import './module/text';
  
 
 import { cin } from './module/curve';
-// scn.add(cin);   
 
 import { moon } from './module/moon';
 moon.position.z = 30;
@@ -63,51 +72,35 @@ function triangle() {
   const geo = new Three.RingGeometry(1, 1.9, 1, 3, 0, 6.238);
   const mat = new Three.MeshBasicMaterial( { color : 0x00adff, side : Three.DoubleSide } );
   
-  const tri = new Three.Mesh(geo, mat);
+  var tri = new Three.Mesh(geo, mat);
 
   const [x, y, z]  = Array(3).fill().map( () => Three.MathUtils.randFloatSpread(150) );
 
   tri.position.set(x, y, z);
-  scn.add(tri)
+  scn.add(tri);
 }
 
+triangle();
 Array(100).fill().forEach(triangle)
 
-// const temp = new triangle();
-// const tri = temp.tri;
-
-
-
-
-
-
-//rectarea light
 
 const rectlit = new Three.RectAreaLight(0x008cff, 100, 20, 20);
 
 rectlit.position.set(0, 0, 150)
 rectlit.lookAt(0, 0, 0);
-// rectlit.rotation.x = 10;
 
 scn.add(rectlit);
 
 const lit = new Three.PointLight(0xfff, 2, 50, 1, 2);
 lit.position.set(5, 5, 5)
-// scn.add(lit)
-
-
-//lit
 
 
 function camera() {
   const m = document.body.getBoundingClientRect().top;
   
-  // moon.rotation.x += 0.002;
+  moon.rotation.x += 2;
 
 
-  // cam.position.z = m * -0.1;
-  // cam.position.x = m * -0.002;
-  // cam.position.y = m * -0.002;
 }
 
 document.body.onscroll = camera;
@@ -124,7 +117,6 @@ function anime() {
   ctrl.update();
   rend.render(scn, cam);
 
-  //bg
   rend.setClearColor( 0xffbb00, 2 );
 
 }
