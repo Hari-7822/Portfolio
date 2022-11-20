@@ -72,12 +72,17 @@ function triangle() {
   const geo = new Three.RingGeometry(1, 1.9, 1, 3, 0, 6.238);
   const mat = new Three.MeshBasicMaterial( { color : 0x00adff, side : Three.DoubleSide } );
   
-  var tri = new Three.Mesh(geo, mat);
+  const tri = new Three.Mesh(geo, mat);
 
   const [x, y, z]  = Array(3).fill().map( () => Three.MathUtils.randFloatSpread(150) );
 
   tri.position.set(x, y, z);
+  
+  tri.rotation.x += 0.03;
+
   scn.add(tri);
+
+
 }
 
 triangle();
@@ -98,7 +103,7 @@ lit.position.set(5, 5, 5)
 function camera() {
   const m = document.body.getBoundingClientRect().top;
   
-  moon.rotation.x += 2;
+  moon.rotation.x += m * 2;
 
 
 }
@@ -117,7 +122,7 @@ function anime() {
   ctrl.update();
   rend.render(scn, cam);
 
-  rend.setClearColor( 0xffbb00, 2 );
+  // rend.setClearColor( 0x560083, 2 );
 
 }
 
