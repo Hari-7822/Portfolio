@@ -1,34 +1,33 @@
 
 body {
 
-	margin: 0px;
+	// margin: 0px;
 
-	background : -webkit-linear-gradient(#1A8FCF,#D1236A,#1A8FCF);
-	background : -moz-linear-gradient(#1A8FCF,#D1236A,#1A8FCF);
-	background : -o-linear-gradient(#1A8FCF,#D1236A,#1A8FCF);
 	background : linear-gradient( 45deg, #1A8FCF,#1A8FCF);
 	
-	overflow: hidden;
-
-	// background: #1A8FCF;
+	// overflow: hidden;
 
 }
 
 
 canvas {
+  
     position :fixed; 
     top : 0;
     left : 0;
     width : 100vw;
     height : 100vh;
+  
   }
 
   main{ 
+    
     width : 100%;
     right : 8px;
     z-index : 99;
     position : absolute;
     color : #000000;
+
   }
 
 .head {

@@ -33,14 +33,6 @@ res();
 
 
 const ctrl = new OrbitControls(cam, rend.domElement);
-ctrl.keys = {
-
-  LEFT : 'ArrowLeft',
-  UP : 'ArrowUp',
-  RIGHT : 'ArrowRight',
-  BOTTOM : 'ArrowDown'
-
-}
 
 
 cam.position.z = 30;
@@ -100,16 +92,20 @@ const lit = new Three.PointLight(0xfff, 2, 50, 1, 2);
 lit.position.set(5, 5, 5)
 
 
-function camera() {
+function move() {
   const m = document.body.getBoundingClientRect().top;
   
-  moon.rotation.x += m * 2;
+  // moon.rotation.x += 2;
+  
+  cam.position.z += m * -0.01;
+  cam.position.y += m * -0.00015;
+  cam.position.x += m * -0.00015;
 
 
 }
 
-document.body.onscroll = camera;
-camera();
+document.body.onscroll = move;  
+move();
 
 function anime() {
   requestAnimationFrame(anime);
