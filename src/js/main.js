@@ -55,7 +55,7 @@ import { moon } from './module/moon';
 moon.position.z = 30;
 moon.position.setX(-10);
 
-scn.add(moon);
+// scn.add(moon);
 
 
 
@@ -91,15 +91,15 @@ scn.add(rectlit);
 const lit = new Three.PointLight(0xfff, 2, 50, 1, 2);
 lit.position.set(5, 5, 5)
 
-
+var body = document.querySelector('body')
 function move() {
-  const m = document.body.getBoundingClientRect().top;
+  const m = body.getBoundingClientRect().top;
   
-  // moon.rotation.x += 2;
+  moon.rotation.x += 2;
   
-  cam.position.z += m * -0.01;
-  cam.position.y += m * -0.00015;
-  cam.position.x += m * -0.00015;
+  cam.position.z = m * -0.01;
+  cam.position.y = m * -0.0002;
+  cam.position.x = m * -0.0002;
 
 
 }

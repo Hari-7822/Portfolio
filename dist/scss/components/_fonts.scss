@@ -1,0 +1,21 @@
+/* fonts */
+$aqua_url : url('../../../dist/fonts/Aquatico.otf');
+$Aquatico : Aquatico;
+
+$nordic: Nordic;
+$nordic_url: url('../../../dist/fonts/Nordic.ttf');
+
+@mixin font-face($font, $url) {
+    @font-face{
+        font-family: $font;
+        src: $url;
+    }
+}
+
+@include font-face($Aquatico, $aqua_url);
+@include font-face($nordic, $nordic_url);
+
+
+
+$sans : 'sans-serif';
+$julius : 'Julius Sans One';

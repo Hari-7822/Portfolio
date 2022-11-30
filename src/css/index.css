@@ -1,5 +1,14 @@
+/* fonts */
+@font-face {
+  font-family: Aquatico;
+  src: url("../../../dist/fonts/Aquatico.otf");
+}
+@font-face {
+  font-family: Nordic;
+  src: url("../../../dist/fonts/Nordic.ttf");
+}
 body {
-  background: linear-gradient(45deg, #1A8FCF, #1A8FCF);
+  background: linear-gradient(45deg, #1A8FCF, #1A8FCF), linear-gradient(90deg, rgba(214, 170, 47, 0.7882352941), #381455), linear-gradient(145deg, rgba(72, 112, 72, 0.8352941176), rgba(207, 195, 26, 0.8431372549)), linear-gradient(180deg, rgba(154, 24, 172, 0.8352941176), rgba(226, 117, 154, 0.7803921569));
 }
 
 canvas {
@@ -29,7 +38,7 @@ main {
   border-radius: 20rem;
 }
 .head__name {
-  font-family: "Julius Sans One", sans-serif;
+  font-family: Aquatico;
   color: #000;
   font-weight: 600;
 }

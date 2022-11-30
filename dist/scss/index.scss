@@ -1,9 +1,17 @@
+@use './components/fonts' as f;
+
+
+$c1 : linear-gradient( 45deg, #1A8FCF,#1A8FCF);
+$c2 : linear-gradient( 90deg, #d6aa2fc9,#381455);
+$c3 : linear-gradient( 145deg, #487048d5,#cfc31ad7);
+$c4 : linear-gradient( 180deg, #9a18acd5,#e2759ac7);
+
 
 body {
 
 	// margin: 0px;
 
-	background : linear-gradient( 45deg, #1A8FCF,#1A8FCF);
+	background : $c1, $c2, $c3, $c4;
 	
 	// overflow: hidden;
 
@@ -42,7 +50,7 @@ canvas {
     }
 
     &__name {
-      font-family : 'Julius Sans One', sans-serif;
+      font-family : f.$Aquatico;
       color : #000;
       font-weight : 600;
 
